@@ -1,8 +1,20 @@
 
-document.getElementById('loan-form').addEventListener('submit',calculateResults);
+document.getElementById('loan-form').addEventListener('submit',calculate);
+
+function calculate(e)
+{
+    //Hide result
+    document.getElementById('results').style.display='none';
+    //Show loading
+    document.getElementById('loading').style.display='block';
+
+    setTimeout(calculateResults,2000);
+
+    e.preventDefault();
+}
 
 
-function calculateResults(e)
+function calculateResults()
 {
 console.log('Calculting....')
 const amount=document.getElementById('amount');
@@ -34,18 +46,23 @@ if(isFinite(month))
     // console.log(totalpayment.value);
     totalinterest.value=((month*calpayment)-principal).toFixed(2);
     // console.log(totalinterest.value);
-    show()
+   //Hide loading
+   document.getElementById('loading').style.display='none';
+    //show result
+    document.getElementById('results').style.display='block';
+    
 
 }
 else
 {
     
     showError("Please check your number");
-
+    document.getElementById('results').style.display='none';
+    document.getElementById('loading').style.display='none';
 }
 
 
-e.preventDefault();
+
 
 }
 function showError(error)
@@ -72,15 +89,3 @@ function clearscreen()
 
 }
 
-function show(e1)
-{
-
-    const sh=document.querySelector('.result');
-    const ans=sh.style.display='inline';
-    console.log(ans);
-   
-
-
-
-
-}
